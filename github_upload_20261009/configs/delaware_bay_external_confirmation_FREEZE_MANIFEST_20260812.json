@@ -1,0 +1,23 @@
+{
+  "frozen_at_local": "2026-08-12 Asia/Shanghai",
+  "frozen_before_noaa_target_download": true,
+  "files": [
+    {
+      "path": "configs/delaware_bay_external_confirmation_20260812.json",
+      "sha256": "4AFBAE05DA94F9F86B99823CAE3D55258769C5E972C30EE6D9D27D5AC6A08B81"
+    },
+    {
+      "path": "project_handoff/05_EXTERNAL_CONFIRMATION_PROTOCOL_CN.md",
+      "sha256": "94FAB3B3028D3CEC39FAE06D6CA66C7C3DDD0BB3F73996462CEA2512D1483524"
+    },
+    {
+      "path": "数据整理/186_download_prepare_delaware_bay_external_confirmation.py",
+      "sha256": "10929C1FB5F8F63B85A02C03CFB0F2547E2E76D810CCEF62B99E5327644184D9"
+    },
+    {
+      "path": "数据整理/187_run_delaware_bay_external_confirmation.py",
+      "sha256": "C1388F7321C1453162372C17F53D47C18B02905417D243838D81249431952E7B"
+    }
+  ],
+  "rule": "Any post-freeze technical repair must be logged and may not be motivated by target metrics."
+}

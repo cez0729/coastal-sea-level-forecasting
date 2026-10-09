@@ -1,0 +1,123 @@
+{
+  "manifest_version": "2026-08-11-logic-revision-1",
+  "purpose": "prospective untouched temporal or regional confirmation; not a completed validation",
+  "current_evidence_boundary": {
+    "2025_h2": "chronological_refit_backtest_already_viewed",
+    "2026_deep": "frozen_evaluation",
+    "2026_varx": "diagnostic_only_added_after_target_viewing"
+  },
+  "hs_dt_rule": {
+    "lead_1_to_23": "0.5 * eta_only + 0.5 * multistate",
+    "lead_24": "multistate",
+    "lead_24_extra_gain_claim_allowed": false,
+    "provenance": "formulated after Tier-A benchmark; frozen before later evaluation runs"
+  },
+  "varx": {
+    "alpha": 100.0,
+    "solver": "lsqr",
+    "training_end_exclusive": "2025-01-01",
+    "selection_period_end_exclusive": "2025-07-01",
+    "window_hours": 24,
+    "horizon_hours": 24,
+    "reconstruction_max_abs_difference": 0.0
+  },
+  "preprocessing_lock": {
+    "scalers": "fit on training period only",
+    "missing_values": "past-dependent causal filling",
+    "graph": "distance support for refit checkpoints; any regional remapping must be declared before scoring",
+    "future_residual_as_input": false
+  },
+  "primary_metrics": [
+    "sequence_residual_R2",
+    "lead24_residual_R2",
+    "lead24_RMSE"
+  ],
+  "descriptive_metrics": [
+    "absolute_q95_residual_R2"
+  ],
+  "excluded_from_mainline": [
+    "event_PR_AUC_without_operational_event_definition"
+  ],
+  "acceptance_criteria": [
+    "eta-only and multistate errors remain highly related but not identical across horizon/station",
+    "HS-DT sequence delta versus both experts is reported with 168-h block uncertainty without requiring positivity",
+    "VARX/deep ranking is evaluated by lead and period without target-selected gates or masks"
+  ],
+  "artifacts": [
+    {
+      "path": "数据整理/134_confirmatory_hsdt_orc_chronological_refit.py",
+      "bytes": 34663,
+      "sha256": "ce92c0e01d02f894d22b1f87194caec2352a19bb4861fdbb7f8fb552016b0923"
+    },
+    {
+      "path": "数据整理/179_horizon_specialization_complementarity.py",
+      "bytes": 10566,
+      "sha256": "8b7b7753ba33969b85af6e51078b1e290a5e63a044182638d02f37a3c4887bc2"
+    },
+    {
+      "path": "数据整理/180_strict_varx_chronological_validation.py",
+      "bytes": 8757,
+      "sha256": "f13edb44093fda4a73553849ef57fe03658450212536e26576a016a38bbddb08"
+    },
+    {
+      "path": "数据整理/183_frozen_varx_2026_diagnostic.py",
+      "bytes": 13234,
+      "sha256": "551343933450cd1a9bb55d8175368e7d5b606a8d2ce776b79c2a52180700f1ad"
+    },
+    {
+      "path": "results/manuscript_logic_revision_20260811/frozen_varx_2023_2024_alpha100.npz",
+      "bytes": 767961,
+      "sha256": "5e28f2d27ac3d82649c8bd2d0aa4bb46d6f4d57cd2c28e365cfb5322d6eeb58e"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_42/gwn_eta_only/best_checkpoint.pt",
+      "bytes": 765305,
+      "sha256": "0388db963599b05219eb4eb780886e7f8956dd2e8f265abfd471fba5a54e83ba"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_42/gwn_multistate_no_physics/best_checkpoint.pt",
+      "bytes": 784630,
+      "sha256": "4a09a452626b2e901492e1b37d46fa758aa84448999a4da0354077ebd55e9941"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_123/gwn_eta_only/best_checkpoint.pt",
+      "bytes": 765305,
+      "sha256": "d16e233256da0cfd5edd50343e6a1fcd1d35ca803f89dc3cc616109367e070b3"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_123/gwn_multistate_no_physics/best_checkpoint.pt",
+      "bytes": 784630,
+      "sha256": "1975971bb41886f0570b3ccc9f227a1f9faef6335d8e9853003a898b218fe26f"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_2024/gwn_eta_only/best_checkpoint.pt",
+      "bytes": 765305,
+      "sha256": "ad1b275d4cb71001b59ee8eb5fa8f130d5b3bf4915e3f289f020dc21efaf6aa5"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_2024/gwn_multistate_no_physics/best_checkpoint.pt",
+      "bytes": 784630,
+      "sha256": "458b9d3c118b157f855e739314ccbc1486fe27d4af62c6a5b0bb44f3166c3437"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_2025/gwn_eta_only/best_checkpoint.pt",
+      "bytes": 765305,
+      "sha256": "dd3fae354e2dde335b0b7a0f9ec063fe46d72eb187b55776ebb1abfb9fbf166a"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_2025/gwn_multistate_no_physics/best_checkpoint.pt",
+      "bytes": 784630,
+      "sha256": "34cca2d6833860b5daeaef24950f0c009886b3fb9f4acdb9dd81d708480fe427"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_3407/gwn_eta_only/best_checkpoint.pt",
+      "bytes": 765305,
+      "sha256": "645f7ee1f8dc912a2b0a2d89fe18e07837e4f6dfb47a3d227a6d5f113d07b314"
+    },
+    {
+      "path": "results/confirmatory_hsdt_orc_refit_2025_h2/seed_3407/gwn_multistate_no_physics/best_checkpoint.pt",
+      "bytes": 784630,
+      "sha256": "a5f6f67172142e0ff3d2c6efe29c77a921ae9c7c53448549a02c9daeef236296"
+    }
+  ]
+}

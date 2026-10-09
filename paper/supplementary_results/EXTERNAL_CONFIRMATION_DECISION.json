@@ -1,0 +1,25 @@
+{
+  "supervision_structure_replicated": false,
+  "eta_winning_leads": 2,
+  "multistate_winning_leads": 22,
+  "eta_winning_stations": 0,
+  "multistate_winning_stations": 10,
+  "hsdt_complementarity_replicated": true,
+  "hsdt_minus_eta_sequence_R2": 0.01634310273815458,
+  "hsdt_minus_multistate_sequence_R2": 0.004533118941892389,
+  "linear_deep_hierarchy_pattern_replicated": true,
+  "VARX_sequence_R2": 0.7656869909381352,
+  "HS_DT_sequence_R2": 0.6911024876404765,
+  "HS_DT_minus_VARX_sequence_R2": -0.07458450329765864,
+  "early_lead_group": [
+    1,
+    8
+  ],
+  "early_group_definition_status": "fixed before external neural scoring but after the local protocol hash",
+  "early_lead_HS_DT_minus_VARX_mean_R2": -0.11844503638710366,
+  "lead24_HS_DT_minus_VARX_R2": 0.013335706820558624,
+  "criteria_passed": 2,
+  "criteria_total": 3,
+  "external_confirmation_success": true,
+  "report_unfavorable_results": true
+}
