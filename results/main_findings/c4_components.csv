@@ -1,0 +1,5 @@
+model,sequence_R2,lead24_R2,sequence_RMSE_m,sequence_MAE_m,source
+HS-DT reference,0.731914,0.615267,0.095161,0.065714,Matched historical C4 bank; manuscript Table 2
+Gate-only,0.730351,0.615965,0.095438,0.065923,Matched historical C4 bank; manuscript Table 2
+Correction-only,0.738353,0.617439,0.094011,0.065009,Matched historical C4 bank; manuscript Table 2
+Full C4,0.739055,0.619047,0.093884,0.064805,Matched historical C4 bank; manuscript Table 2

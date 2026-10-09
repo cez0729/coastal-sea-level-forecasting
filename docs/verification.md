@@ -5,7 +5,7 @@ Verified locally on 2026-10-09:
 - Python syntax compilation for public source, scripts, and tests.
 - Seven synthetic invariant tests passed.
 - Expert-training and C4 CLI help imported successfully.
-- The result viewer read the saved CSVs and rendered its comparison figure.
+- The result viewer read the saved CSVs. The README figure script rendered the method diagram and main-result comparison.
 - Missing-data preflight correctly refused full training without the five required processed inputs.
 - With identical state dictionaries and synthetic inputs, renamed Eta GWN and Multistate GWN outputs matched the original Tier-A implementations exactly (maximum absolute difference 0.0).
 - C4 state-dict keys and checked outputs (mean, expert predictions, gate, correction, and log scale) matched the original aligned implementation exactly.

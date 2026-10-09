@@ -2,19 +2,60 @@
 
 We predict the next 24 hours of non-tidal sea-level residuals from the previous 24 hours of observations and environmental inputs. The original network contains seven northeastern US coastal stations and 34 input features. A separate ten-station Delaware network provides an additional spatial evaluation.
 
-The project compares fixed-support Graph WaveNet experts, their HS-DT combination, and a C4 residual-correction model. VARX-Ridge and physical-loss models provide additional comparisons. The main question is what each added component contributes to forecast accuracy and uncertainty.
+The main methods are **HS-DT**, a fixed combination of two Graph WaveNet experts, and **C4**, which learns a bounded correction and predictive uncertainty while keeping those experts frozen.
 
-## Start here
+## From two experts to C4
 
-```bash
-python -m pip install -r requirements.txt
-python -m unittest discover -s tests -v
-python scripts/show_results.py
-```
+The **Eta-only expert** predicts the sea-level residual. The **Multistate expert** also predicts current and wave-related states. Both use temporal convolutions and the same fixed distance graph.
 
-The tests use synthetic inputs. The viewer reads saved result tables and writes a comparison figure to `output/`. Full training needs the processed data described below.
+**HS-DT** averages their predictions at Leads 1–23 and uses the Multistate forecast at Lead 24. It adds no trainable parameters. This provides a simple reference for testing whether the experts can help each other.
 
-## Methods
+**C4** starts from that rule and adds three learned components:
+
+- A bounded gate adjusts the expert weights using their temporal contexts.
+- A bounded residual correction adjusts the combined prediction.
+- A Gaussian head estimates a dynamic scale for the predictive distribution.
+
+The experts remain frozen. The gate and correction start at zero adjustment, so C4 initially matches HS-DT. The main C4 model does not use a physical loss; physical variants are separate controls.
+
+![The two Graph WaveNet experts, HS-DT combination, and C4 extension](docs/figures/hsdt_c4_architecture.png)
+
+## Main results
+
+### HS-DT: sequence gains over individual experts
+
+In the original historical benchmark, Sequence R² is **0.7261** for Eta-only, **0.7250** for Multistate, and **0.7357** for HS-DT. Later evaluations also show sequence gains over the Multistate expert:
+
+| Evaluation period | HS-DT Sequence R² | Gain over Multistate | Positive seeds |
+|---|---:|---:|---:|
+| 2025 H2 chronological refit | 0.6563 | +0.01243 | 5/5 |
+| 2026 H1 frozen evaluation | 0.5385 | +0.01525 | 5/5 |
+| July 2026 frozen evaluation | 0.4093 | +0.01773 | 5/5 |
+
+HS-DT and Multistate give identical Lead-24 predictions by construction. The sequence gains therefore do not imply an additional terminal gain.
+
+### C4: residual correction and uncertainty
+
+| Matched comparison | HS-DT Sequence R² | C4 Sequence R² | Paired gain [95% CI] | Positive seeds |
+|---|---:|---:|---|---:|
+| Seven-station historical test | 0.731914 | 0.739055 | +0.007141 [0.002121, 0.013309] | 5/5 |
+| Ten-station Delaware test | 0.680256 | 0.688031 | +0.007775 [0.00229, 0.01462] | 5/5 |
+
+These are five-run mean scores. The seven-station C4 comparison uses its own matched HS-DT reference, not the 0.7357 score from the original expert bank. The ten-station C4 evaluation was added after the original external experiment and is treated as supporting evidence.
+
+The component comparison identifies **residual correction as the main source of historical point-forecast improvement**. Correction-only reaches Sequence R² = 0.738353; Gate-only reaches 0.730351, below the matched HS-DT reference. C4 reduces historical MSE by **2.66%**, but its Lead-24 gain is not statistically clear.
+
+The scale-only control keeps C4's mean prediction unchanged. Dynamic scale reduces CRPS from **0.048927 to 0.047039 m** at seven stations and from **0.064824 to 0.061739 m** at ten stations. All five seeds improve in both comparisons.
+
+![HS-DT expert comparison, C4 components, paired C4 gains, and dynamic-scale control](docs/figures/hsdt_c4_findings.png)
+
+The figure separates the original expert bank from the matched C4 comparisons. Data and reported intervals are in [results/main_findings](results/main_findings); the [manuscript](paper/manuscript.pdf) explains the full experiments.
+
+## Supporting comparisons
+
+VARX-Ridge remains a strong linear baseline. Ordinary same-supervision ensembles are also competitive: these tests do not show that different supervision gives a general advantage over Multi+Multi. Matched physical-prior effects are small or mixed. These controls help separate the effects of expert combination, residual correction, and predicted scale. See [the evidence notes](docs/evidence.md) and [control results](results/controls).
+
+## Code
 
 | Component | Role | Implementation |
 |---|---|---|
@@ -24,19 +65,6 @@ The tests use synthetic inputs. The viewer reads saved result tables and writes 
 | C4 | Frozen experts, bounded gate/correction, Gaussian scale | `src/models/correction/c4.py` |
 | VARX-Ridge | Strong linear comparator | `src/models/linear/varx.py` |
 | Physical-loss GNN-BiGRU | Matched physical-residual diagnostic | `src/models/physics/multistate_gnn_bigru.py` |
-
-## Results
-
-- In the matched historical experiment, C4 improves sequence R² from **0.731914** to **0.739055** relative to HS-DT. The values are means of five separate runs.
-- Ordinary same-supervision ensembles remain competitive. Cross-supervision averaging does not outperform Multi+Multi in the ten-station control. The results do not establish a unique benefit from supervision diversity.
-- With the C4 mean held fixed, dynamic scale reduces CRPS from **0.048927 to 0.047039 m** in the seven-station test, and **0.064824 to 0.061739 m** in the ten-station test.
-- Matched physical-prior effects are small or mixed. They do not explain the Multistate model's Lead-24 advantage.
-
-The [manuscript](paper/manuscript.pdf) gives the full comparisons. [Evidence notes](docs/evidence.md) explain the evaluation periods and confidence intervals. CSV tables are in `results/`.
-
-![Ordinary ensemble controls: mean pair scores in two networks](docs/figures/ensemble_controls.png)
-
-## Repository layout
 
 ```text
 src/
@@ -56,7 +84,15 @@ docs/            # Data, evidence, and refactoring notes
 paper/           # Current manuscript
 ```
 
-## Training and evaluation
+## Run the code
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python scripts/show_results.py
+```
+
+The tests use synthetic inputs. The viewer displays the saved HS-DT and C4 findings. Rebuild the two README figures with `python scripts/build_readme_figures.py`.
 
 Full training requires the processed data listed in [docs/data.md](docs/data.md). Data are not bundled. Model code uses training-fitted transformations and the protocol in `PROTOCOL.json`.
 

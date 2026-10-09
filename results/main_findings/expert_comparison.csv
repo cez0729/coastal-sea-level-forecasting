@@ -1,0 +1,4 @@
+model,sequence_R2,lead24_R2,seeds,source
+Eta-only GWN,0.7261170923472978,0.5824581971721429,5,Original historical expert bank; manuscript Table 1
+Multistate GWN,0.7250231560306618,0.6152673533625707,5,Original historical expert bank; manuscript Table 1
+HS-DT,0.7356619808530431,0.6152673533625707,5,Original historical expert bank; manuscript Table 1

@@ -11,3 +11,4 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python scripts/show_results.py
+      - run: python scripts/build_readme_figures.py
