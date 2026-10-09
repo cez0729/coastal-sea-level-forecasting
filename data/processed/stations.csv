@@ -1,0 +1,8 @@
+﻿station_id,station_name,lat,lon,state,timezone,tide_type
+8461490,New London,41.371666,-72.09556,CT,EST,Mixed
+8510560,Montauk,41.048332,-71.95944,NY,EST,Mixed
+8516945,Kings Point,40.8103,-73.7649,NY,EST,Mixed
+8518750,The Battery,40.700554,-74.01417,NY,EST,Mixed
+8531680,Sandy Hook,40.4669,-74.0094,NJ,EST,Mixed
+8534720,Atlantic City,39.356667,-74.41805,NJ,EST,Mixed
+8536110,Cape May,38.9683,-74.96,NJ,EST,Mixed

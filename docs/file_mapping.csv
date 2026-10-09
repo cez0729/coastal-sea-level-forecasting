@@ -1,0 +1,17 @@
+original_file,public_file
+74_multistate_physics_loss_gnn_bigru_v2.py,src/models/physics/multistate_gnn_bigru.py
+76_enhanced_forcing_physics_loss_ablation_v3.py,src/training/state_ablation.py
+77_v4_physics_loss_weight_strategy_search.py,src/training/weighted_losses.py
+78_final_four_models_enhanced_data.py,src/data/feature_pipeline.py
+101_priority1_publication_experiments.py,src/models/graph/graph_wavenet.py
+104_priority2_physics_graph_wavenet.py,src/training/train_graph_experts.py
+108_horizon_specialized_dual_task_gwn.py,src/models/ensemble/hsdt.py
+67_download_noaa_multiyear_raw.py,src/data/download_noaa_multiyear_raw.py
+69_make_noaa_multiyear_residual.py,src/data/make_noaa_multiyear_residual.py
+70_download_era5_multiyear.py,src/data/download_era5_multiyear.py
+72_make_era5_multiyear_station_features.py,src/data/make_era5_multiyear_station_features.py
+71_make_copernicus_multiyear_station_features.py,src/data/make_copernicus_multiyear_station_features.py
+75_download_noaa_ndbc_enhanced_forcing.py,src/data/download_noaa_ndbc_enhanced_forcing.py
+additional_experiments/c4_hsdt_aligned_20260818/run_aligned_c4.py,src/models/correction/c4.py
+additional_experiments/ensemble_scale_controls_20261009/run_controls.py,src/evaluation/ensemble_scale_controls.py
+170_physics_reliability_gated_residual_moe.py (VARX helper extraction),src/models/linear/varx.py

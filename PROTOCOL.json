@@ -1,0 +1,39 @@
+{
+  "evidence_tier": "retrospective_aligned_forcing_tier_a",
+  "task": "past_24h_to_future_24h_non_tidal_residual",
+  "region": "US_Northeast_7_stations",
+  "time_range": "2023-01-01_to_2025-12-31",
+  "split": {
+    "method": "chronological_fraction_of_full_aligned_series",
+    "train_ratio": 0.70,
+    "validation_ratio": 0.15,
+    "test_ratio": 0.15
+  },
+  "training": {
+    "seeds": [42, 123, 2024, 2025, 3407],
+    "train_stride": 8,
+    "validation_stride": 1,
+    "test_stride": 1,
+    "hidden_dim": 64,
+    "gwn_blocks": 6,
+    "diffusion_steps": 2,
+    "dropout": 0.15,
+    "batch_size": 256,
+    "epochs": 120,
+    "patience": 20,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.00001
+  },
+  "multistate_no_physics": {
+    "aux_weight": 0.08,
+    "last_step_weight": 0.20,
+    "physics_lambda": 0.0
+  },
+  "hs_dt_gwn": {
+    "lead_1_to_23_multistate_weight": 0.5,
+    "lead_24_multistate_weight": 1.0,
+    "trainable_fusion_parameters": 0
+  },
+  "not_strict_2025_h2": true,
+  "not_issue_time_operational": true
+}
