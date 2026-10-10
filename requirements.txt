@@ -4,3 +4,4 @@ scipy
 scikit-learn
 matplotlib
 torch
+# Lightweight runtime dependencies for the public checks and result viewer.
