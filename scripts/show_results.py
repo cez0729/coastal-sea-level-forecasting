@@ -16,7 +16,7 @@ def main():
     scale = scale.groupby(['region', 'scale'])[['CRPS', 'NLL', 'coverage_95', 'width_95']].mean()
     print('\nSame C4 mean; saved five-run probability scores:')
     print(scale.to_string())
-    print('\nOrdinary ensemble controls remain available under results/controls/.')
+    print('\nSupporting ensemble controls: results/controls/ (kept separate from the main findings).')
 
 if __name__ == '__main__':
     main()
