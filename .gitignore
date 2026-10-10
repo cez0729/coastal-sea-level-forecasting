@@ -20,3 +20,4 @@ output/
 *.npz
 *.log
 *.zip
+# Local data caches and generated experiment outputs stay out of the public tree.
