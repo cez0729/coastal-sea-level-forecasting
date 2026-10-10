@@ -4,3 +4,4 @@ cdsapi
 xarray
 netCDF4
 copernicusmarine
+# Optional packages used when rebuilding the full data products.
