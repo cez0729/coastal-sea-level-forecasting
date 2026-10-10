@@ -43,6 +43,7 @@ v2 = p104.v2
 
 
 def fusion_weights(horizon: int, mode: str) -> np.ndarray:
+    """Return the fixed horizon rule used by the public HS-DT comparison."""
     if mode == "dual_task_equal_ensemble":
         return np.full(horizon, 0.5, dtype=np.float64)
     if mode == "horizon_specialized_dual_task_gwn":
