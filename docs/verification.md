@@ -1,6 +1,6 @@
 # Release verification
 
-Verified locally on 2026-10-09:
+Verified locally on 2026-10-09. These are quick release checks, not a replacement for full training:
 
 - Python syntax compilation for public source, scripts, and tests.
 - Seven synthetic invariant tests passed.
