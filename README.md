@@ -4,6 +4,27 @@ We predict the next 24 hours of non-tidal sea-level residuals from the previous 
 
 The main methods are **HS-DT**, a fixed combination of two Graph WaveNet experts, and **C4**, which learns a bounded correction and predictive uncertainty while keeping those experts frozen.
 
+## Research timeline and development history
+
+This repository was made public after the main experiments were completed. Its Git history therefore shows the cleanup and release process, not the full research timeline. The research itself developed in stages:
+
+| Period | What we worked on | What we learned |
+|---|---|---|
+| 2023–2025 | Built the seven-station dataset from water level, tide, weather, current, and wave records. | The useful target is the non-tidal residual, rather than the much easier tidal signal. |
+| Early 2026 | Tested fixed-graph and learnable-graph GNN-BiGRU models, ODE-inspired inputs, and a physical residual loss. | Physical terms helped in some smaller backbones, but the gain was not universal. |
+| Spring 2026 | Added DCRNN and Graph WaveNet as stronger temporal-spatial baselines. | The backbone and the supervision target mattered more than adding a simple physical penalty. |
+| Mid 2026 | Trained Eta-only and Multistate Graph WaveNet experts under the same forecasting protocol. | The two experts made different errors across the 24-hour horizon. |
+| Mid to late 2026 | Turned that observation into the fixed HS-DT rule, then tested a frozen-expert C4 correction layer. | A small residual correction was more useful than a free-standing gate; the uncertainty head improved CRPS. |
+| Current release | Removed duplicate scripts, kept the reproducible model paths, and added synthetic checks and result tables. | The public code now highlights the main scientific path and keeps exploratory controls separate. |
+
+The timeline records the order in which questions were tested. It does not present every trial as a successful method. Models that were useful as controls, but did not give a stable gain, remain documented in the supporting results.
+
+### How to read the project
+
+Start with the two experts, then read the HS-DT rule, and finally inspect C4. The result tables identify whether a number comes from the original historical benchmark, a matched C4 comparison, or the later external evaluation. This separation matters because those comparisons use different reference predictions.
+
+For reproducibility, the repository keeps the data sources and preprocessing notes, the model code, the saved summary tables, and small contract tests together. Full forcing data and trained checkpoints are not included because of size and source restrictions. A new run should first check the protocol and data inventory, then report its seed and split before comparing scores.
+
 ## From two experts to C4
 
 The **Eta-only expert** predicts the sea-level residual. The **Multistate expert** also predicts current and wave-related states. Both use temporal convolutions and the same fixed distance graph.
