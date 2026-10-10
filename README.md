@@ -10,11 +10,11 @@ This repository was made public after the main experiments were completed. Its G
 
 | Period | What we worked on | What we learned |
 |---|---|---|
-| 2023–2025 | Built the seven-station dataset from water level, tide, weather, current, and wave records. | The useful target is the non-tidal residual, rather than the much easier tidal signal. |
-| Early 2026 | Tested fixed-graph and learnable-graph GNN-BiGRU models, ODE-inspired inputs, and a physical residual loss. | Physical terms helped in some smaller backbones, but the gain was not universal. |
-| Spring 2026 | Added DCRNN and Graph WaveNet as stronger temporal-spatial baselines. | The backbone and the supervision target mattered more than adding a simple physical penalty. |
-| Mid 2026 | Trained Eta-only and Multistate Graph WaveNet experts under the same forecasting protocol. | The two experts made different errors across the 24-hour horizon. |
-| Mid to late 2026 | Turned that observation into the fixed HS-DT rule, then tested a frozen-expert C4 correction layer. | A small residual correction was more useful than a free-standing gate; the uncertainty head improved CRPS. |
+| Data preparation | Assembled water level, tide, weather, current, and wave records covering 2023–2025. | Predicting the non-tidal residual separates the target from the tidal signal. |
+| Initial comparisons | Tested GNN-BiGRU models, ODE-inspired inputs, and a physical residual loss. | Physical terms helped in some settings, but the gain was not universal. |
+| Stronger baselines | Added DCRNN and Graph WaveNet. | A stronger backbone changed the model ranking. |
+| July 2026 | Combined Eta-only and Multistate predictions into HS-DT and tested chronological refits. | The fixed combination improved sequence scores; Lead 24 still came directly from Multistate. |
+| August 2026 and later analyses | Evaluated the Delaware network and developed C4 with the original HS-DT experts frozen. | Residual correction improved historical point forecasts; dynamic scale improved CRPS. |
 | Current release | Removed duplicate scripts, kept the reproducible model paths, and added synthetic checks and result tables. | The public code now highlights the main scientific path and keeps exploratory controls separate. |
 
 The timeline records the order in which questions were tested. It does not present every trial as a successful method. Models that were useful as controls, but did not give a stable gain, remain documented in the supporting results.
