@@ -1,4 +1,5 @@
 {
+  "description": "Locked public benchmark for seven-station residual forecasting",
   "evidence_tier": "retrospective_aligned_forcing_tier_a",
   "task": "past_24h_to_future_24h_non_tidal_residual",
   "region": "US_Northeast_7_stations",
