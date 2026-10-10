@@ -2,6 +2,7 @@ name: Model checks
 on: [push, pull_request]
 jobs:
   synthetic-checks:
+    name: Public model contract checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
