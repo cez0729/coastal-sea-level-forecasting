@@ -1,6 +1,6 @@
 # Main findings used in the project overview
 
-These CSVs contain the values displayed in the manuscript and README figures. They are display tables, not newly computed experiments.
+These CSVs contain the values displayed in the manuscript and README figures. They are small, readable reporting tables, not newly computed experiments.
 
 - `expert_comparison.csv`: the original historical expert bank (manuscript Table 1).
 - `c4_components.csv`: the matched historical C4 component scores (Table 2).
