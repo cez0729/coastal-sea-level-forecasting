@@ -16,6 +16,7 @@ def load(name, relative):
     return module
 
 class ModelContracts(unittest.TestCase):
+    """Small shape and freezing checks for the public model paths."""
     @classmethod
     def setUpClass(cls):
         torch.set_num_threads(1)
